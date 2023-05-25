@@ -256,10 +256,9 @@ class PygubuDesigner:
         """Exit the app if it is ready for quit."""
         self.__on_window_close()
 
-    def set_title(self, newtitle):
+    def set_title(self, newtitle=None):
         self.current_title = newtitle
-        default_title = "Pygubu Designer - {0}"
-        title = default_title.format(newtitle)
+        title = f"Pygubu Designer {pygubudesigner.__version__}" + (f" - {newtitle}" if newtitle else "")
         self.mainwindow.wm_title(title)
 
     def _setup_app_bindings(self):
@@ -931,6 +930,7 @@ def start_pygubu():
     check_dependency("appdirs", "1.3", help)
 
     app = PygubuDesigner()
+    app.set_title()
 
     filename = args.filename
     if filename is not None:
