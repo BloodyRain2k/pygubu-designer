@@ -38,6 +38,10 @@ options = {
         "values": '["yes", "no"]',
         "default": "no",
     },
+    "replace_linebreaks": {
+        "values": '["yes", "no"]',
+        "default": "no",
+    },
     "geometry": {
         "default": "640x480",
     },

@@ -66,6 +66,7 @@ class ScriptGenerator:
         self.cb_import_tkvars = builder.get_object("cb_import_tkvars")
         self.cb_add_i18n = builder.get_object("cb_add_i18n")
         self.cb_all_ids_attributes = builder.get_object("cb_all_ids_attributes")
+        self.replace_linebreaks = False
 
         _ = self.app.translator
         self.msgtitle = _("Script Generator")
@@ -338,6 +339,8 @@ class ScriptGenerator:
 
     def set_code(self, text):
         self.txt_code.delete("0.0", "end")
+        if self.replace_linebreaks:
+            text = text.replace("\r\n", "\n")
         self.txt_code.insert("0.0", text)
 
     def get_code(self):
