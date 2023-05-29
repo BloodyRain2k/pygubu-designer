@@ -405,3 +405,9 @@ class PreferencesUI:
         if fname:
             self.cwtv.insert("", tk.END, text=fname)
             self._configure_path_remove()
+
+    def on_auto_generate_code(self):
+        self.builder.get_object("chk_auto_generate_code_on_prop_change").configure(
+            state="normal" if ("selected" in self.builder.get_object("chk_auto_generate_code").state()) \
+                else "disabled"
+        )
