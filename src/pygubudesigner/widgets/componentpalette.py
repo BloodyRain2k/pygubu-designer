@@ -80,7 +80,7 @@ class ComponentPalette(ttk.Frame):
             return
         frame_1 = ToolbarFrame(self.notebook)
         frame_1.configure(padding=2)
-        frame_1.pack(expand="true", fill="both", side="top")
+        frame_1.pack(side="top", expand=True, fill="both")
         self.notebook.add(frame_1, text=label)
         self._tabs[tabid] = frame_1
 
