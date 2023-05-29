@@ -25,23 +25,27 @@ class ${class_name}:
         builder.add_resource_path(PROJECT_PATH)
         builder.add_from_file(PROJECT_UI)
         # Main widget
-        self.mainwindow = builder.get_object("${main_widget}", master)
+        self.mainwindow: ${widget_base_class} = builder.get_object("${main_widget}", master)
 %if set_main_menu:
         # Main menu
         _main_menu = builder.get_object("${main_menu_id}", self.mainwindow)
         self.mainwindow.configure(menu=_main_menu)
 %endif
-        %if tkvariables:
+    %if tkvariables:
 
-          %for var in tkvariables:
-        self.${var} = None
-          %endfor
-        builder.import_variables(self, ${tkvariables})
+        %for var in tkvariables:
+        self.${var}:${tkvariablehints[var]} = None
+        %endfor
+        builder.import_variables(self)
 
-        %endif
+    %endif
         builder.connect_callbacks(self)
 
-    def run(self):
+    def run(self, center=False):
+        if center:
+            x = self.mainwindow.winfo_screenwidth() - self.mainwindow.wm_minsize()[0]
+            y = self.mainwindow.winfo_screenheight() - self.mainwindow.wm_minsize()[1]
+            self.mainwindow.geometry(f"+{x // 2}+{y // 2}")
         self.mainwindow.mainloop()
     %if has_ttk_styles:
 
