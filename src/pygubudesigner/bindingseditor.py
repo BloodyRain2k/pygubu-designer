@@ -74,6 +74,7 @@ class BindingsEditor:
         self._adder = "adder"
         self._allow_edit = False
         self._parent = parent
+        self._bindings_scaled = False
         self.tv.insert("", tk.END, iid=self._adder, values=("+",))
         self.tv.bind("<<TreeviewInplaceEdit>>", self._on_inplace_edit)
         self.tv.bind("<<TreeviewCellEdited>>", self._on_cell_edited)
@@ -158,6 +159,10 @@ class BindingsEditor:
             self._parent.pack(fill="both", expand="True")
         else:
             self._parent.pack_forget()
+
+        if not self._bindings_scaled:
+            print("frame:", self._parent.winfo_width(), self._parent.winfo_reqwidth(),
+                "tv:", self.tv.winfo_width(), self.tv.winfo_reqwidth())
 
         for bind in wdescr.bindings:
             self._add_binding(bind)

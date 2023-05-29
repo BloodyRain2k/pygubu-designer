@@ -644,24 +644,24 @@
                                                                   <object class="ttk.Treeview.Column" id="sequence">
                                                                     <property name="column_anchor">w</property>
                                                                     <property name="heading_anchor">w</property>
-                                                                    <property name="minwidth">20</property>
+                                                                    <property name="minwidth">50</property>
                                                                     <property name="stretch">True</property>
                                                                     <property name="text" translatable="yes">Sequence descriptor</property>
                                                                     <property name="tree_column">False</property>
                                                                     <property name="visible">True</property>
-                                                                    <property name="width">200</property>
+                                                                    <property name="width">150</property>
                                                                   </object>
                                                                 </child>
                                                                 <child>
                                                                   <object class="ttk.Treeview.Column" id="handler">
                                                                     <property name="column_anchor">w</property>
                                                                     <property name="heading_anchor">w</property>
-                                                                    <property name="minwidth">20</property>
+                                                                    <property name="minwidth">50</property>
                                                                     <property name="stretch">True</property>
                                                                     <property name="text" translatable="yes">Event Handler</property>
                                                                     <property name="tree_column">False</property>
                                                                     <property name="visible">True</property>
-                                                                    <property name="width">200</property>
+                                                                    <property name="width">150</property>
                                                                   </object>
                                                                 </child>
                                                                 <child>
