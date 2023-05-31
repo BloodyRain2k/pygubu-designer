@@ -243,15 +243,15 @@ class ScriptGenerator:
         menulist_state = "normal"
         all_ids_state = "normal"
         if template == "application":
-            name = f"{classname}App"
+            name = f"{classname}App" if not classname.lower().endswith("app") else classname
             self.classnamevar.set(name)
             import_tkvars_state = "normal"
             all_ids_state = "disabled"
         elif template == "codescript":
-            name = f"{classname}App"
+            name = f"{classname}App" if not classname.lower().endswith("app") else classname
             self.classnamevar.set(name)
         elif template == "widget":
-            name = f"{classname}Widget"
+            name = f"{classname}Widget" if not classname.lower().endswith("widget") else classname
             self.classnamevar.set(name)
             add_i18n_state = "disabled"
             menulist_state = "disabled"
