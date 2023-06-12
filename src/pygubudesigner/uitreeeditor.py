@@ -1089,9 +1089,14 @@ class WidgetsTreeEditor:
             # max_rc = self.get_max_row_col(item)
             self.editor_edit(item, self.treedata[item])
         else:
+            item = None
             # No selection hide all
             self.editor_hide_all()
-
+        
+        palette = self.app._palette.frame.nametowidget("!frame.!frame")
+        for k, btn in palette.children.items():
+            btn["state"] = "normal" if self._validate_add(item, btn.classname, False) else "disabled"
+        self.app._palette.show_group()
         # Check if some menu items (such as 'Duplicate') should be disabled or not.
         # The reason is: the treeview selection has changed, so we need to evaluate
         # whether it makes sense to have some menus enabled or not.

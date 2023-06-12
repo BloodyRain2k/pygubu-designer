@@ -96,14 +96,20 @@ class ComponentPalette(ttk.Frame):
             compound="top",
             takefocus=True,
         )
+        b.classname = ttiplabel
         tooltip.create(b, ttiplabel)
         b.pack(side="left")
         self._buttons.append((b, group))
 
-    def show_group(self, group):
+    def show_group(self, group=None):
+        if not group:
+            group = self.gvalue.get()
         for b, g in self._buttons:
             if g == group:
-                b.pack(side="left")
+                if str(b["state"]) == "normal":
+                    b.pack(side="left")
+                else:
+                    b.pack_forget()
             else:
                 b.pack_forget()
         self.gvalue.set(group)
