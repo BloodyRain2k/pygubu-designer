@@ -238,7 +238,9 @@ class PygubuDesigner:
 
         # Tab Code
         self.script_generator = ScriptGenerator(self)
-        self.script_generator.replace_linebreaks = pref.get_option("replace_linebreaks") == "yes"
+        self.script_generator.replace_linebreaks = (
+            pref.get_option("replace_linebreaks") == "yes"
+        )
 
         # App bindings
         self._setup_app_bindings()
@@ -592,7 +594,9 @@ class PygubuDesigner:
             "default_layout_manager"
         )
 
-        self.script_generator.replace_linebreaks = pref.get_option("replace_linebreaks") == "yes"
+        self.script_generator.replace_linebreaks = (
+            pref.get_option("replace_linebreaks") == "yes"
+        )
 
     def ask_save_changes(self, message, detail=None, title=None):
         do_continue = False

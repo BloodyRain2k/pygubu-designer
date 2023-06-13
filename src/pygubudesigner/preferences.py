@@ -20,8 +20,13 @@ CONFIG_FILE = Path(dirs.user_data_dir) / "config"
 logger.info(f"Using configfile: {CONFIG_FILE}")
 
 options = {
-    "widget_set": {"values": '["tk", "ttk"]', "default": "ttk"},
-    "ttk_theme": {"default": "default"},
+    "widget_set": {
+        "values": '["tk", "ttk"]',
+        "default": "ttk"
+    },
+    "ttk_theme": {
+        "default": "default"
+    },
     "default_layout_manager": {
         "values": '["pack", "grid", "place"]',
         "default": "pack",

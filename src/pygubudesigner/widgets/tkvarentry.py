@@ -47,7 +47,7 @@ class TkVarPropertyEditor(PropertyEditor):
         w.grid(row=0, column=1, sticky="we")
         self.rowconfigure(0, weight=1)
         self.columnconfigure(0, weight=1)
-
+        self.configure(borderwidth=0)
         self._entry.bind("<<PropertyChanged>>", self._on_variable_changed)
         self._cbox.bind("<<PropertyChanged>>", self._on_variable_changed)
         self._cbox.parameters(

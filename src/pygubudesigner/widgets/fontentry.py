@@ -142,6 +142,7 @@ class FontPropertyEditor(PropertyEditor):
         w.grid(row=0, column=6, sticky="we")
         w.bind("<<PropertyChanged>>", self._on_variable_changed)
 
+        self.configure(borderwidth=0)
         self.columnconfigure(0, weight=1)
         self._populate_options()
 
