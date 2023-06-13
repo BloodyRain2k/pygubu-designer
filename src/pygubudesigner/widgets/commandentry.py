@@ -121,6 +121,7 @@ class CommandPropertyEditor(CommandPropertyBase):
         w.parameters(values=cmdtypes)
         w.bind("<<PropertyChanged>>", self._on_variable_changed)
         w.grid(row=1, column=1, sticky="nswe")
+        self.configure(borderwidth=0)
         self.columnconfigure(1, weight=1)
 
     def _set_value(self, value):

@@ -238,7 +238,9 @@ class PygubuDesigner:
 
         # Tab Code
         self.script_generator = ScriptGenerator(self)
-        self.script_generator.replace_linebreaks = pref.get_option("replace_linebreaks") == "yes"
+        self.script_generator.replace_linebreaks = (
+            pref.get_option("replace_linebreaks") == "yes"
+        )
 
         # App bindings
         self._setup_app_bindings()
@@ -592,6 +594,9 @@ class PygubuDesigner:
             "default_layout_manager"
         )
 
+        self.script_generator.replace_linebreaks = (
+            pref.get_option("replace_linebreaks") == "yes"
+        )
         self._palette._toolbar_mode = \
             self.tree_editor.toolbar_mode = pref.get_option("toolbar_mode")
         self._palette.show_group()
