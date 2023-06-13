@@ -61,6 +61,7 @@ class WidgetsTreeEditor:
         self.virtual_clipboard_for_duplicate = None
         self.duplicating = False
         self.duplicate_parent_iid = None
+        self.toolbar_mode = pref.get_option("toolbar_mode")
 
         # Get the default layout manager based on the user's configuration.
         self.__preferred_layout_manager_var = tk.StringVar()
@@ -1093,10 +1094,13 @@ class WidgetsTreeEditor:
             # No selection hide all
             self.editor_hide_all()
         
-        palette = self.app._palette.frame.nametowidget("!frame.!frame")
-        for k, btn in palette.children.items():
-            btn["state"] = "normal" if self._validate_add(item, btn.classname, False) else "disabled"
-        self.app._palette.show_group()
+        if self.toolbar_mode != "default":
+            palette = self.app._palette.frame.nametowidget("!frame.!frame")
+            for k, btn in palette.children.items():
+                btn["state"] = "normal" if self._validate_add(item, btn.classname, False) else "disabled"
+            if self.toolbar_mode == "hide":
+                self.app._palette.show_group()
+        
         # Check if some menu items (such as 'Duplicate') should be disabled or not.
         # The reason is: the treeview selection has changed, so we need to evaluate
         # whether it makes sense to have some menus enabled or not.
