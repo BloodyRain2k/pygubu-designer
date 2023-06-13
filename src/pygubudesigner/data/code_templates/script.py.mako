@@ -20,7 +20,11 @@ ${widget_code}
         self.mainwindow.configure(menu=_main_menu)
 %endif
 
-    def run(self):
+    def run(self, center=False):
+        if center:
+            x = self.mainwindow.winfo_screenwidth() - self.mainwindow.wm_minsize()[0]
+            y = self.mainwindow.winfo_screenheight() - self.mainwindow.wm_minsize()[1]
+            self.mainwindow.geometry(f"+{x // 2}+{y // 2}")
         self.mainwindow.mainloop()
     %if has_ttk_styles:
 
