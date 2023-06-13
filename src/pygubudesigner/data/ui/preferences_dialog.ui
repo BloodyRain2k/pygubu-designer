@@ -192,6 +192,17 @@
                             </layout>
                           </object>
                         </child>
+                        <child>
+                          <object class="pygubu.builder.widgets.combobox" id="cbox_toolbar_mode" named="True">
+                            <property name="keyvariable">string:toolbar_mode</property>
+                            <layout manager="grid">
+                              <property name="column">1</property>
+                              <property name="pady">4</property>
+                              <property name="row">5</property>
+                              <property name="sticky">ew</property>
+                            </layout>
+                          </object>
+                        </child>
                       </object>
                     </child>
                     <child>

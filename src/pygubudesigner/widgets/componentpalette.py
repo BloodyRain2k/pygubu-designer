@@ -65,6 +65,7 @@ class ComponentPalette(ttk.Frame):
         fbntab.pack(side="left", expand=True, fill="x")
         component_palette.config(height="200", padding="2", width="200")
         component_palette.pack(side="top", expand=True, fill="x")
+        self._toolbar_mode = "default"
         self._tabs = {}
         self._buttons = []
 
@@ -106,7 +107,9 @@ class ComponentPalette(ttk.Frame):
             group = self.gvalue.get()
         for b, g in self._buttons:
             if g == group:
-                if str(b["state"]) == "normal":
+                if self._toolbar_mode != "hide" or str(b["state"]) == "normal":
+                    if str(b["state"]) != "normal":
+                        b["state"] = "normal"
                     b.pack(side="left")
                 else:
                     b.pack_forget()

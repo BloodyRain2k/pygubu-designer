@@ -592,7 +592,9 @@ class PygubuDesigner:
             "default_layout_manager"
         )
 
-        self.script_generator.replace_linebreaks = pref.get_option("replace_linebreaks") == "yes"
+        self._palette._toolbar_mode = \
+            self.tree_editor.toolbar_mode = pref.get_option("toolbar_mode")
+        self._palette.show_group()
 
     def ask_save_changes(self, message, detail=None, title=None):
         do_continue = False

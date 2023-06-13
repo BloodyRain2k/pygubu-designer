@@ -42,6 +42,10 @@ options = {
         "values": '["yes", "no"]',
         "default": "no",
     },
+    "toolbar_mode": {
+        "values": '["default", "disable", "hide"]',
+        "default": "default",
+    },
     "replace_linebreaks": {
         "values": '["yes", "no"]',
         "default": "no",
@@ -203,6 +207,12 @@ class PreferencesUI:
         cbox_layout_manager = builder.get_object("cbox_layout_manager")
         cbox_layout_manager.configure(
             values=options["default_layout_manager"]["values"]
+        )
+
+        # toolbar mode
+        cbox_toolbar_mode = builder.get_object("cbox_toolbar_mode")
+        cbox_toolbar_mode.configure(
+            values=options["toolbar_mode"]["values"]
         )
 
         self.cwtv = builder.get_object("cwtv")
