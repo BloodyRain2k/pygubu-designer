@@ -47,6 +47,9 @@ class ${class_name}:
             y = self.mainwindow.winfo_screenheight() - self.mainwindow.wm_minsize()[1]
             self.mainwindow.geometry(f"+{x // 2}+{y // 2}")
         self.mainwindow.mainloop()
+    
+    def get_widget(self, widget_id: str) -> tk.Widget:
+        return self.builder.objects[widget_id].widget
 
 ${callbacks}\
 </%block>
