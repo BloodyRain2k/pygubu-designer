@@ -134,17 +134,28 @@ class PropertiesEditor:
         self._current = wdescr
         wclass = wdescr.classname
         class_descr = CLASS_MAP[wclass].builder
-
+        maxwidth = 0
         for name in PropertiesManager.iternames():
             label, widget = self._propbag[name]
             if name in ("class", "id") or name in class_descr.properties:
                 self.update_editor(label, widget, wdescr, name)
                 label.grid()
                 widget.grid()
+                # label.update()
+                # widget.update()
+                width = label.winfo_width() + widget.winfo_width()
+                maxwidth = width if width > maxwidth else maxwidth
+                print(f"    {name}, {label.winfo_width()} + {widget.winfo_width()} = {width}")
             else:
                 # hide property widget
                 label.grid_remove()
                 widget.grid_remove()
+        self._frame.update()
+        if self._frame.winfo_width() < self._sframe.winfo_width():
+            print("max:", maxwidth, "frame:", self._frame.winfo_width(), "sframe:", self._sframe.winfo_width())
+            print(self._frame.children["!separator"])
+            # self._frame.configure(width = self._sframe.winfo_width())
+            # self._frame.update()
         self._sframe.reposition()
 
     def hide_all(self):

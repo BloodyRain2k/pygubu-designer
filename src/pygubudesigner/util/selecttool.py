@@ -26,7 +26,10 @@ class SelectTool:
         self._sstart = None
 
     def click_handler(self, event):
-        self._start_selecting(event)
+        if event.state & 4:
+            self._finish_selecting(event)
+        else:
+            self._start_selecting(event)
 
     def motion_handler(self, event):
         if self._selecting:

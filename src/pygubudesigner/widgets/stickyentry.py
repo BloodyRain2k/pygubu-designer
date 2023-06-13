@@ -116,7 +116,7 @@ class StickyPropertyEditor(PropertyEditor):
         canvas = self._c
         region = canvas.region_selected
         items = canvas.find_overlapping(*region)
-        self._activate(items)
+        self._activate(items, event.state & 4 > 0)
 
     def _clear(self):
         self._paint(self._items)
@@ -131,7 +131,7 @@ class StickyPropertyEditor(PropertyEditor):
             if state[pos]:
                 self._c.itemconfigure(item, fill=color)
 
-    def _activate(self, items):
+    def _activate(self, items, keep=False):
         self._paint(self._items.keys())
         state = [0] * (self.DIM * self.DIM)
         for item in items:

@@ -302,6 +302,8 @@ class ScriptGenerator:
 
     def get_classname(self):
         name = pathlib.Path(self.projectname).stem
+        if not name.count("_") and not name.count(" "):
+            return name
         return self.camel_case(name)
 
     def form_valid(self):
