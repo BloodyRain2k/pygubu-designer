@@ -52,8 +52,10 @@ class PropertiesEditor:
     def _create_properties(self):
         """Populate a frame with a list of all editable properties"""
         self._frame = f = ttk.Frame(self._sframe.innerframe)
-        f.grid(sticky="nswe")
-
+        f.pack_configure(expand=1,fill="both")
+        f.columnconfigure(0, weight=0, pad=5, minsize=100)
+        f.columnconfigure(1, weight=1, minsize=100)
+        
         label_tpl = "{0}:"
         row = 0
         col = 0
