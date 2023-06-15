@@ -43,8 +43,15 @@ class ${class_name}:
 
     def run(self, center=False):
         if center:
-            x = self.mainwindow.winfo_screenwidth() - self.mainwindow.wm_minsize()[0]
-            y = self.mainwindow.winfo_screenheight() - self.mainwindow.wm_minsize()[1]
+            x_min = self.mainwindow.wm_minsize()[0]
+            y_min = self.mainwindow.wm_minsize()[1]
+            if x_min == 1 or y_min == 1:
+                geom = self.builder.objects[list(self.builder.objects)[0]]
+                geom = geom.wmeta.properties["geometry"].split("x")
+                x_min = int(geom[0])
+                y_min = int(geom[1])
+            x = self.mainwindow.winfo_screenwidth() - x_min
+            y = self.mainwindow.winfo_screenheight() - y_min
             self.mainwindow.geometry(f"+{x // 2}+{y // 2}")
         self.mainwindow.mainloop()
     
