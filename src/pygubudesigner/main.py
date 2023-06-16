@@ -512,8 +512,7 @@ class PygubuDesigner:
         self._palette = ComponentPalette(fpalette, notebook=(
             pref.get_option("single_section") == "no"))
 
-        self._palette._toolbar_mode = \
-            self.tree_editor.toolbar_mode = pref.get_option("toolbar_mode")
+        self._palette._toolbar_mode = pref.get_option("toolbar_mode")
 
         # Start building widget tree selector
         roots = {}
