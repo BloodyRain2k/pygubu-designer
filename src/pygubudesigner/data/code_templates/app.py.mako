@@ -25,7 +25,7 @@ class ${class_name}:
         builder.add_resource_path(PROJECT_PATH)
         builder.add_from_file(PROJECT_UI)
         # Main widget
-        self.mainwindow: ${widget_base_class} = builder.get_object("${main_widget}", master)
+        self.mainwindow:${widget_base_class} = builder.get_object("${main_widget}", master)
 %if set_main_menu:
         # Main menu
         _main_menu = builder.get_object("${main_menu_id}", self.mainwindow)
@@ -41,22 +41,30 @@ class ${class_name}:
     %endif
         builder.connect_callbacks(self)
 
+    def center(self, event):
+        """ `winfo_width` / `winfo_height` at this point return set `geometry` size. """
+        x_min = max(self.main_w,
+            self.mainwindow.wm_minsize()[0],
+            self.mainwindow.winfo_width(),
+            self.mainwindow.winfo_reqwidth())
+        y_min = max(self.main_h,
+            self.mainwindow.wm_minsize()[1],
+            self.mainwindow.winfo_height(),
+            self.mainwindow.winfo_reqheight())
+        x = self.mainwindow.winfo_screenwidth() - x_min
+        y = self.mainwindow.winfo_screenheight() - y_min
+        self.mainwindow.geometry(f"{x_min}x{y_min}+{x // 2}+{y // 2}")
+        self.mainwindow.unbind("<Map>", self.center_map)
+
     def run(self, center=False):
         if center:
-            x_min = self.mainwindow.wm_minsize()[0]
-            y_min = self.mainwindow.wm_minsize()[1]
-            geom = self.builder.objects[list(self.builder.objects)[0]]
-            if "geometry" in geom.wmeta.properties:
-                geom = geom.wmeta.properties["geometry"].split("x")
-            else:
-                geom = (0,0)
-            x_min = max(x_min, int(geom[0]), self.mainwindow.winfo_reqwidth())
-            y_min = max(y_min, int(geom[1]), self.mainwindow.winfo_reqheight())
-            x = self.mainwindow.winfo_screenwidth() - x_min
-            y = self.mainwindow.winfo_screenheight() - y_min
-            self.mainwindow.geometry(f"+{x // 2}+{y // 2}")
+            """ If `width` and `height` are set for the main widget,
+            this is the only time TK returns them. """
+            self.main_w = self.mainwindow.winfo_reqwidth()
+            self.main_h = self.mainwindow.winfo_reqheight()
+            self.center_map = self.mainwindow.bind("<Map>", self.center)
         self.mainwindow.mainloop()
-    
+
     def get_widget(self, widget_id: str) -> tk.Widget:
         return self.builder.objects[widget_id].widget
 
