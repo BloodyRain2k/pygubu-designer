@@ -60,6 +60,25 @@ class ${class_name}:
         self.mainwindow.geometry(f"{x_min}x{y_min}+{x // 2}+{y // 2}")
         self.mainwindow.unbind("<Map>", self.center_map)
 
+    def get_widget(self, widget_id: str) -> tk.Widget:
+        return self.builder.objects[widget_id].widget
+
+    def instanceWidget(self, widgetName, instanceName=None, master=None, extra_init_args:dict=None) -> tk.Widget:
+        if not instanceName:
+            count = 0
+            for k in (master if master else self.mainwindow).children:
+                if k.startswith(widgetName):
+                    count += 1
+            instanceName = f"{widgetName}_{count + 1}"
+        if not extra_init_args:
+            extra_init_args = { "name": instanceName }
+        elif "name" not in extra_init_args:
+            extra_init_args["name"] = instanceName
+        widget = self.builder.get_object(widgetName, master, extra_init_args)
+        self.builder.objects[instanceName] = self.builder.objects.pop(widgetName)
+        print(f"instanced '{widgetName}' as '{instanceName}'")
+        return widget
+
     def run(self, center=False):
         if center:
             """ If `width` and `height` are set for the main widget,
@@ -68,9 +87,6 @@ class ${class_name}:
             self.main_h = self.mainwindow.winfo_reqheight()
             self.center_map = self.mainwindow.bind("<Map>", self.center)
         self.mainwindow.mainloop()
-
-    def get_widget(self, widget_id: str) -> tk.Widget:
-        return self.builder.objects[widget_id].widget
 
 ${callbacks}\
 </%block>
