@@ -42,11 +42,12 @@ ${widget_code}
         x = screen_w - x_min
         y = screen_h - y_min
         size = f"{x_min}x{y_min}+{x // 2}+{y // 2}"
+        # clean up state from on-run call
         if self.main_w > 0 or self.main_h > 0:
+            widget.unbind("<Map>", self.center_map)
             self.main_w = 0
             self.main_h = 0
         widget.geometry(size)
-        widget.unbind("<Map>", self.center_map)
 
     def run(self, center=False):
         if center:
