@@ -1,15 +1,16 @@
-import sys, logging
+import sys, pathlib, logging
+PATH = pathlib.Path(__file__).parent
 # sys.path.insert(1, __file__)
-sys.path.insert(1, "D:\Coding\- My -\Python\PyGubu-Designer\src")
-sys.path.insert(1, "D:\Coding\- My -\Python\PyGubu\src")
+sys.path.insert(1, f"{PATH}")
+sys.path.insert(1, f"{PATH}/../../pygubu/src")
 print("path:", sys.path)
 
 args = sys.argv
 if len(args) > 1 and not args[1].endswith(".ui"):
     args.pop(1)
 if len(args) < 2:
-    args.append("D:\Coding\- My -\Python\WorkLog\WorkLogApp.ui")
-    # args.append("D:\Programs\CloneSpy64\Result_Compare.ui")
+    args.append(f"{PATH}/../../Python-WorkLog/WorkLogApp.ui")
+    pass
 # args += ["--loglevel", "DEBUG"]
 print("argv:", args)
 
